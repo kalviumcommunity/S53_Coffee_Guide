@@ -1,0 +1,93 @@
+[
+  {
+    "name": "The Original Black Coffee",
+    "description": "Black coffee is as simple as it gets with ground coffee beans steeped in hot water, served warm.",
+    "ingredients": {
+      "ing_1": "Coffee Beans",
+      "ing_2": "Water"
+    },
+    "img_link": "https://majestycoffee.com/cdn/shop/articles/black_coffee_600x600_crop_center.jpg?v=1684059071"
+  },
+  {
+    "name": "The Latte",
+    "description": "The latte is comprised of a shot of espresso and steamed milk with just a touch of foam.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://www.allrecipes.com/thmb/Wh0Qnynwdxok4oN0NZ1Lz-wl0A8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/9428203-9d140a4ed1424824a7ddd358e6161473.jpg"
+  },
+  {
+    "name": "The Cortado",
+    "description": "Like yin and yang, a cortado is the perfect balance of espresso and warm steamed milk. The milk is used to cut back on the espresso's acidity.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://www.foodandwine.com/thmb/Qurs1iLJrIc04emK1BxcnyQn_bo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Partners-Cortado-FT-BLOG0523-7e4f50be961e4a6490fdfa5a34d6e0f5.jpg"
+  },
+  {
+    "name": "The Cappuccino",
+    "description": "Cappuccino is a latte made with more foam than steamed milk, often with a sprinkle of cocoa powder or cinnamon on top.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fill,g_auto,w_1500,ar_3:2/k%2FPhoto%2FRecipe%20Ramp%20Up%2F2022-07-Cappuccino%2FCappuccino"
+  },
+  {
+    "name": "The Americano",
+    "description": "With a similar flavor to black coffee, the americano consists of an espresso shot diluted in hot water.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Water"
+    },
+    "img_link": "https://www.taylorlane.com/cdn/shop/articles/Delicious-Homemade-Americano_1000x.jpg?v=1605897263"
+  },
+  {
+    "name": "The Espresso",
+    "description": "To make espresso, water is forced through finely ground coffee beans at very high pressure. An espresso shot can be served solo or used as the foundation of most coffee drinks, like lattes and macchiatos.",
+    "ingredients": {
+      "ing_1": "Coffee Beans",
+      "ing_2": "Water"
+    },
+    "img_link": "https://lux-haus.net/cdn/shop/articles/stencil.default_3_471f6dbb-2159-48c9-a41d-4fe6f4bf8e30.jpg?v=1648740565&width=1100"
+  },
+  {
+    "name": "The Macchiato",
+    "description": "The macchiato is another espresso-based drink that has a small amount of foam on top. It's the happy medium between a cappuccino and a doppio. This coffee drink features a shot of espresso topped with a layer of frothy foam.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://www.acouplecooks.com/wp-content/uploads/2020/10/how-to-make-a-macchiato-003s.jpg"
+  },
+  {
+    "name": "The Mocha",
+    "description": "For all you chocolate lovers out there, you'll fall in love with a mocha. The mocha is a chocolate espresso drink with steamed milk and foam.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk",
+      "ing_3": "Cacoa Powder"
+    },
+    "img_link": "https://athome.starbucks.com/sites/default/files/2021-06/1_CAH_CaffeMocha_Hdr_2880x16602.jpg"
+  },
+  {
+    "name": "The Flat White",
+    "description": "This Aussie-born drink is basically a cappuccino without the foam or chocolate sprinkle. It's an espresso drink with steamed milk.",
+    "ingredients": {
+      "ing_1": "A shot of Espresso Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://www.eatthis.com/wp-content/uploads/sites/4/media/images/ext/554793180/starbucks-flat-white.jpg?quality=100&strip=1"
+  },
+  {
+    "name": "The Café au Lait",
+    "description": "Café au lait is perfect for the coffee minimalist who wants a bit more flavor. Just add a splash of warm milk to your coffee and you're all set!",
+    "ingredients": {
+      "ing_1": "Black Coffee",
+      "ing_2": "Milk"
+    },
+    "img_link": "https://www.eatthis.com/wp-content/uploads/sites/4/media/images/ext/554793180/starbucks-flat-white.jpg?quality=100&strip=1"
+  }
+]
