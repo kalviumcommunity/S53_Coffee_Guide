@@ -10,7 +10,7 @@ app.use(express.json());
 app.use("/api/crud/", crudRouter);
 connectDB();
 
-app.get("/home", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     // Check if the mongoose connection is ready
     const isConnected = mongoose.connection.readyState === 1;
