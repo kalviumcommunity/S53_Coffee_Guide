@@ -2,17 +2,18 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/dbConnection");
 const mongoose = require("mongoose");
+const crudRouter = require("./routes/crudRouter");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
-
+app.use("/api/crud/", crudRouter);
 connectDB();
 
-app.get("/home", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     // Check if the mongoose connection is ready
-    const isConnected =  mongoose.connection.readyState === 1;
+    const isConnected = mongoose.connection.readyState === 1;
     if (isConnected) {
       res.send("Database connection status: Connected");
     } else {
