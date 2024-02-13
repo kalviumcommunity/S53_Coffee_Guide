@@ -14,33 +14,34 @@ const BasicBrews = () => {
       <div className="flex-grid">
         <h1>Our Coffee Selections</h1>
         <div className="grid-coffee">
-          <div className="card">
-            <h1>Black Coffee</h1>
-            <div className="coffee-data">
-              <div className="outer">
-                <img
-                  src="https://www.allrecipes.com/thmb/MPt-QLff3yzJ4kgoO09PmyVAU50=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Latte-in-a-white-mug-3x2-1-3427b428cd5f4026842c5fafd1b01895.png"
-                  alt=""
-                />
-                <div className="outer-ing">
-                  <h1>Ingredients</h1>
-                  <ul>
-                    <li>Coffee Beans</li>
-                    <li>Water</li>
-                  </ul>
+        {coffees.map((coffee, i) => {
+            return (
+              <div className="card" key={i} >
+                <h1>{coffee.name}</h1>
+                <div className="coffee-data">
+                  <div className="outer">
+                    <img src={coffee.img_link} alt=""  data-aos="fade-up" data-aos-duration="1500"/>
+                    <div className="outer-ing">
+                      <h1>Ingredients</h1>
+                      <ul>
+                        <li>{coffee.ingredients.ing_1}</li>
+                        <li>{coffee.ingredients.ing_2}</li>
+                        {coffee.ingredients.ing_3 && (
+                          <li>{coffee.ingredients.ing_3}</li>
+                        )}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="inner">
+                    <p>{coffee.description}</p>
+                    <a href={coffee.vid_link}>
+                      <button>Watch Recipe</button>
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div className="inner">
-                <p>
-                  Black coffee is as simple as it gets with ground coffee beans
-                  steeped in hot water, served warm.
-                </p>
-                <a href="">
-                  <button>Watch Recipe</button>
-                </a>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>
