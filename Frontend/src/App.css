@@ -105,6 +105,7 @@ body {
 
 .link:hover {
   color: #ffa70f;
+  transition: all 0.4s;
 }
 
 .link:active {
@@ -114,6 +115,7 @@ body {
 
 .link1:hover {
   color: #ffecc7;
+  transition: all 0.4s;
   text-decoration: underline;
 }
 .link1:active {
@@ -189,4 +191,160 @@ blockquote {
   font-size: 30px;
   padding: 15px;
   letter-spacing: 2px;
+}
+
+.continue {
+  margin: 1% 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.continue div {
+  padding: 10px;
+  width: 70%;
+  text-align: left;
+  letter-spacing: 3px;
+  font-family: royale;
+  font-size: 70px;
+  color: rgb(255, 170, 0);
+}
+
+.continue button {
+  padding: 20px;
+  font-size: 30px;
+  font-weight: 900;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  letter-spacing: 2px;
+  border: 3px solid hsl(40, 100%, 50%);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+}
+
+.continue button:hover {
+  color: #000000;
+  background-color: hsla(0, 0%, 100%, 0.445);
+  border: 3px solid rgb(0, 0, 0);
+  transition: all 0.7s;
+}
+
+.continue button:active {
+  transition: none;
+  transform: translateY(2px);
+}
+
+.flex-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 3% auto;
+}
+
+.flex-grid h1 {
+  font-family: royale;
+  font-size: 90px;
+  color: #000000;
+  letter-spacing: 3px;
+  text-decoration: underline 6px;
+}
+
+.grid-coffee {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 30px;
+  border: 10px solid black;
+  background: hsla(0, 0%, 39%, 0.3);
+  border: 7px solid rgb(0, 0, 0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
+}
+
+.card h1 {
+  text-align: center;
+  font-family: forte;
+  font-size: 40px;
+  color: #ffecc7;
+  text-decoration: underline;
+}
+
+.coffee-data {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.outer img {
+  width: 320px;
+  height: 250px;
+  border: 5px solid rgb(229, 171, 35);
+  border-radius: 10px 2px 10px 2px;
+}
+
+.outer-ing {
+  padding: 20px;
+}
+
+.outer-ing h1 {
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-align: center;
+  font-family: forte;
+  color: #000000;
+  font-size: 28px;
+  text-decoration: underline;
+}
+
+.outer-ing ul {
+  padding: 10px;
+  font-size: 25px;
+  font-family: royale;
+}
+
+.inner {
+  text-align: center;
+}
+
+.inner p {
+  padding: 50px 30px 0 40px;
+  letter-spacing: 2px;
+  text-align: left;
+  font-size: 25px;
+  font-family: royale;
+}
+
+.inner button {
+  margin: 10% auto;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  letter-spacing: 2px;
+  border: 3px solid rgb(255, 170, 0);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+}
+
+.inner button:hover {
+  color: #000000;
+  background-color: hsla(0, 0%, 100%, 0.445);
+  border: 3px solid rgb(0, 0, 0);
+  transition: all 0.7s;
+}
+
+.inner button:active {
+  transition: none;
+  transform: translateY(2px);
 }
