@@ -1,7 +1,9 @@
 const asyncHandler = require("express-async-handler");
+const CoffeeModel = require("../models/coffeeModels");
 
 const getData = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: "CRUD Get Request is Successful." });
+  const data = await CoffeeModel.find();
+  res.status(200).json(data);
 });
 
 const createData = asyncHandler(async (req, res) => {
