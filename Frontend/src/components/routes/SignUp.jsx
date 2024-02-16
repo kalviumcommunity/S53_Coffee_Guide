@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Form = () => {
+const SignUp = () => {
   const {
     register,
     handleSubmit,
@@ -175,4 +175,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default SignUp;
