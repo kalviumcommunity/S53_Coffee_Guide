@@ -3,24 +3,51 @@ import axios from "axios";
 
 const BasicBrews = () => {
   const [coffees, setCoffee] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/api/crud/")
-      .then((coffee) => setCoffee(coffee.data))
-      .catch((err) => console.log(err));
+    const fetchData = async () => {
+      try {
+        //! change to render.com link
+        const response = await axios.get(
+          "https://s53-coffee-guide.onrender.com/api/crud/"
+        );
+        setCoffee(response.data);
+        setIsLoading(false); // Set loading to false after data is fetched
+      } catch (err) {
+        console.log(err);
+        setIsLoading(false); // Display an error message if fetching fails
+      }
+    };
+
+    fetchData();
   }, []);
+
   return (
     <div>
       <div className="flex-grid">
         <h1>Our Coffee Selections</h1>
-        <div className="grid-coffee">
-        {coffees.map((coffee, i) => {
-            return (
-              <div className="card" key={i} >
+        {isLoading ? (
+          <div className="loading-container">
+            <img
+              src="https://i.pinimg.com/originals/b1/b8/fb/b1b8fbe29e6218d69b23b900d85b6595.gif"
+              alt=""
+            />
+            <p>Loading coffees...</p>
+          </div>
+        ) : (
+          <div className="grid-coffee">
+            {coffees.map((coffee, i) => (
+              <div className="card" key={i}>
                 <h1>{coffee.name}</h1>
                 <div className="coffee-data">
                   <div className="outer">
-                    <img src={coffee.img_link} alt=""  data-aos="fade-up" data-aos-duration="1500"/>
+                    <img
+                      src={coffee.img_link}
+                      alt=""
+                      data-aos="fade-up"
+                      data-aos-duration="1500"
+                    />
                     <div className="outer-ing">
                       <h1>Ingredients</h1>
                       <ul>
@@ -40,9 +67,9 @@ const BasicBrews = () => {
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
