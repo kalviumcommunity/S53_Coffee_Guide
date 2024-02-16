@@ -19,11 +19,17 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex2">
+            <Link to="/" className="link1">
+              <p>Home</p>
+            </Link>
             <Link to="/brews" className="link1">
               <p>Basic Brews</p>
             </Link>
             <Link to="/concoctions" className="link1">
-              <p>JavaCraft Junction</p>
+              <p>PostTe</p>
+            </Link>
+            <Link to="/post" className="link1">
+              <p>JavaCraft</p>
             </Link>
             <Link to="/signup" className="link1">
               <p>Sign Up</p>

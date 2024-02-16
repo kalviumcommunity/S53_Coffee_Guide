@@ -13,10 +13,19 @@
   src: url("./assets/fonts/Forte.ttf");
 }
 
+@font-face {
+  font-family: "Saeada";
+  src: url("./assets/fonts/Saeada.otf");
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+button {
+  cursor: pointer;
 }
 
 ::selection {
@@ -67,7 +76,7 @@ body {
 }
 
 .flex1 {
-  width: inherit;
+  width: 37%;
   font-family: Forte;
   font-weight: 900;
   letter-spacing: 4px;
@@ -89,7 +98,7 @@ body {
 
 .link {
   display: flex;
-  width: 45%;
+  width: 80%;
   align-items: center;
   line-height: 50px;
   text-decoration: none;
@@ -251,6 +260,19 @@ blockquote {
   text-decoration: underline 6px;
 }
 
+.loading-container {
+  margin: 3% auto;
+  text-align: center;
+  font-size: 30px;
+  font-family: royale;
+}
+
+.loading-container img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
 .grid-coffee {
   padding: 20px;
   display: grid;
@@ -258,7 +280,8 @@ blockquote {
   gap: 20px;
 }
 
-.card {
+.card,
+.card-post {
   padding: 30px;
   border: 10px solid black;
   background: hsla(0, 0%, 39%, 0.3);
@@ -269,12 +292,14 @@ blockquote {
   box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
 }
 
-.card h1 {
+.card h1,
+.card-post h1 {
   text-align: center;
   font-family: forte;
   font-size: 40px;
   color: #ffecc7;
   text-decoration: underline;
+  padding: 10px;
 }
 
 .coffee-data {
@@ -284,7 +309,8 @@ blockquote {
   padding: 10px;
 }
 
-.outer img {
+.outer img,
+.card-post img {
   width: 320px;
   height: 250px;
   border: 5px solid rgb(229, 171, 35);
@@ -313,6 +339,7 @@ blockquote {
 
 .inner {
   text-align: center;
+  position: relative;
 }
 
 .inner p {
@@ -324,10 +351,13 @@ blockquote {
 }
 
 .inner button {
-  margin: 10% auto;
-  padding: 10px;
+  /* margin: 10% auto; */
+  position: absolute;
+  bottom: 0;
+  left: 150px;
   font-size: 20px;
   font-weight: 900;
+  padding: 10px;
   border-radius: 10px;
   color: #ffffff;
   font-family: forte;
@@ -347,4 +377,351 @@ blockquote {
 .inner button:active {
   transition: none;
   transform: translateY(2px);
+}
+
+.form-container {
+  margin: 4% auto;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form styles */
+.form {
+  background: hsla(38, 100%, 53%, 0.4);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 7px solid rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  width: 900px;
+  padding: 30px;
+}
+
+.form h1 {
+  font-size: 40px;
+  font-weight: 900;
+  font-family: forte;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 5px solid #000000;
+}
+
+/* Input styles for form */
+.form-input {
+  background: hsla(0, 0%, 100%, 0.8);
+  box-sizing: border-box;
+  border: 3px solid #000000;
+  border-radius: 5px;
+  height: 40px;
+}
+
+/* Label and button container styles */
+.label-flex,
+.button-flex {
+  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button styles within button-flex */
+.button-flex .button:first-child {
+  cursor: pointer;
+}
+
+/* Label styles */
+.label-flex h2 {
+  font-family: royale;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+/* Error message styles */
+.err {
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  color: brown;
+  font-weight: 400;
+}
+
+form {
+  font-family: forte;
+  font-size: 23px;
+  font-weight: 900;
+  margin: 1.5% 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Input styles for form */
+form input[type="password"],
+form input[type="text"],
+form textarea {
+  margin: 2px 0 2px 0;
+  font-family: "Open Sans", sans-serif;
+  padding: 10px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+/* Focus styles for form inputs */
+form input[type="password"]:focus,
+form input[type="text"]:focus {
+  outline: none;
+}
+
+/* Submit button styles */
+input[type="submit"] {
+  margin: 1% auto;
+  font-size: 20px;
+}
+
+.signup-btn {
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  letter-spacing: 2px;
+  border: 3px solid rgb(255, 170, 0);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+  padding: 10px;
+}
+
+.intro-container {
+  margin: 3% auto;
+  text-align: center;
+}
+
+.intro-container h1 {
+  font-family: royale;
+  font-size: 90px;
+  color: #000000;
+  letter-spacing: 3px;
+  text-decoration: underline 6px;
+}
+
+.intro-container p {
+  font-family: forte;
+  letter-spacing: 5px;
+  /* font-weight: 900; */
+  margin: 0% 15% 2% 15%;
+  border-radius: 20px;
+  color: #000000;
+  padding: 30px;
+  text-align: center;
+  font-size: 45px;
+  background: hsla(38, 100%, 53%, 0.4);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 10px solid rgba(0, 0, 0, 0.2);
+}
+
+.flex-grid-post {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  margin: 5% 5%;
+  position: relative;
+}
+
+.grid-coffee-post {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card-post {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card-post h1 {
+  color: #000000;
+}
+
+.card-post h2 {
+  padding: 10px;
+  font-family: forte;
+  color: #ffecc7;
+}
+
+.card-post strong {
+  color: black;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.card-post button {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 900;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  letter-spacing: 2px;
+  border: 3px solid hsl(40, 100%, 50%);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+}
+
+.card-post button:hover {
+  color: #000000;
+  background-color: hsla(0, 0%, 100%, 0.445);
+  border: 3px solid rgb(0, 0, 0);
+  transition: all 0.4s;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  letter-spacing: 2px;
+  border: 3px solid rgb(255, 170, 0);
+  background-color: hsla(0, 0%, 0%, 0.9);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+  padding: 40px;
+}
+
+.modal-content img {
+  width: 600px;
+  height: 450px;
+  border-radius: 10px;
+  border: 3px solid rgb(255, 216, 137);
+}
+
+.modal-content h1 {
+  text-align: center;
+  font-size: 40px;
+  text-decoration: underline;
+  color: #ffecc7;
+}
+
+.modal-content h2 {
+  font-size: 30px;
+  padding: 20px;
+  text-align: right;
+  position: relative;
+}
+.modal-flex {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.modal-flex-1 {
+  width: 40%;
+}
+
+.modal-flex-2 {
+  width: 60%;
+}
+
+.modal-flex-1 h3,
+.modal-flex-2 h3 {
+  font-size: 30px;
+  text-decoration: underline;
+  padding: 18px;
+}
+
+.modal-flex-1 ul,
+.modal-flex-2 ol {
+  font-size: 20px;
+  margin: 0 0 0 25px;
+}
+
+.modal-flex-2 p {
+  margin: 10% 0 10% 0;
+  font-size: 24px;
+  font-family: saeada;
+}
+
+.close {
+  color: white;
+  font-weight: 900;
+  font-size: 50px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.close:hover {
+  color: rgb(0, 0, 0);
+  background-color: #ffecc7;
+  transition: all 0.5s;
+}
+
+.add-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 -3% 0;
+  font-size: 50px;
+}
+
+.add-flex h2 {
+  padding: 0 50px 0 0;
+  font-family: royale;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 60px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  text-underline-position: none;
+  background: hsla(38, 100%, 53%, 0.4);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 4px solid rgba(0, 0, 0, 0.2);
+}
+
+.add:hover {
+  background: hsla(0, 0%, 0%, 0.857);
+  border: 4px solid hsl(38, 100%, 53%);
+  color: white;
+  transition: all 0.4s;
 }

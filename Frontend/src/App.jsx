@@ -9,6 +9,7 @@ import AOS from "aos";
 import SignUp from "./components/routes/SignUp";
 import body from "./assets/body.png"
 import "aos/dist/aos.css";
+import PostForm from "./components/routes/PostForm";
 
 function App() {
   AOS.init();
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/brews" element={<BasicBrews />} />
         <Route path="/concoctions" element={<AddConcoction />} />
+        <Route path="/post" element={<PostForm/>} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
     </>
