@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,6 +21,7 @@ const PostForm = () => {
       );
       console.log("response: ", data);
       setPostData(response.data);
+      navigate("/concoctions");
     } catch (error) {
       console.error("Error posting data:", error);
     }
