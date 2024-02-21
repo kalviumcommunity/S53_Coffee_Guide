@@ -10,6 +10,7 @@ import SignUp from "./components/routes/SignUp";
 import body from "./assets/body.png"
 import "aos/dist/aos.css";
 import PostForm from "./components/routes/PostForm";
+import UpdateForm from "./components/routes/UpdateForm";
 
 function App() {
   AOS.init();
@@ -23,6 +24,7 @@ function App() {
         <Route path="/concoctions" element={<AddConcoction />} />
         <Route path="/post" element={<PostForm/>} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/update/:id" element={<UpdateForm />} />
       </Routes>
     </>
   );

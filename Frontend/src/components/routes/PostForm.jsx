@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -15,13 +17,26 @@ const PostForm = () => {
   const onSubmit = async (data) => {
     console.log("data: ", data);
     try {
+      //! change to render.com link
       const response = await axios.post(
         "https://s53-coffee-guide.onrender.com/api/crud/",
         data
       );
+      toast.success("Coffee Posted", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       console.log("response: ", data);
       setPostData(response.data);
-      navigate("/concoctions");
+      setTimeout(() => {
+        navigate("/concoctions");
+      }, 2000);
     } catch (error) {
       console.error("Error posting data:", error);
     }
@@ -37,6 +52,7 @@ const PostForm = () => {
 
   return (
     <div className="form-container">
+      <ToastContainer />
       <div className="form">
         <h1>Create a Coffee Post</h1>
         <form>
