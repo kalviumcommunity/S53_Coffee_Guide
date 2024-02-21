@@ -725,3 +725,11 @@ input[type="submit"] {
   color: white;
   transition: all 0.4s;
 }
+
+.update-delete {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 50%;
+  margin: 2% auto;
+}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddConcoction = () => {
   const [posts, setPosts] = useState([]);
@@ -13,7 +15,7 @@ const AddConcoction = () => {
       try {
         //! change to render.com link
         const response = await axios.get(
-          "https://s53-coffee-guide.onrender.com/api/crud/posts"
+          `${import.meta.env.VITE_SERVER_URL}/posts`
         );
         setPosts(response.data);
         setIsLoading(false);
@@ -36,9 +38,36 @@ const AddConcoction = () => {
     setModalOpen(false);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      //! change to render.com link
+      const deletePost = await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/${id}`
+      );
+      toast.success("Post Deleted", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setIsLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (err) {
+      console.error("Error deleting posts:", err);
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="intro-container">
+        <ToastContainer />
         <h1>PostTe</h1>
         <p>
           Indulge your passion for coffee and share your flavorful concoctions
@@ -82,6 +111,19 @@ const AddConcoction = () => {
                 >
                   View Details
                 </button>
+                <div className="update-delete">
+                  <Link
+                    to={`/update/${post._id}`}
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <button>Update</button>
+                  </Link>
+                  <button onClick={(e) => handleDelete(post._id)}>
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
