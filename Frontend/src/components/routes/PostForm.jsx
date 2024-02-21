@@ -19,7 +19,7 @@ const PostForm = () => {
     try {
       //! change to render.com link
       const response = await axios.post(
-        "https://s53-coffee-guide.onrender.com/api/crud/",
+        `${import.meta.env.VITE_SERVER_URL}/`,
         data
       );
       toast.success("Coffee Posted", {

@@ -15,7 +15,7 @@ const AddConcoction = () => {
       try {
         //! change to render.com link
         const response = await axios.get(
-          "https://s53-coffee-guide.onrender.com/api/crud/posts"
+          `${import.meta.env.VITE_SERVER_URL}/posts`
         );
         setPosts(response.data);
         setIsLoading(false);
@@ -42,7 +42,7 @@ const AddConcoction = () => {
     try {
       //! change to render.com link
       const deletePost = await axios.delete(
-        `https://s53-coffee-guide.onrender.com/api/crud/${id}`
+        `${import.meta.env.VITE_SERVER_URL}/${id}`
       );
       toast.success("Post Deleted", {
         position: "top-center",
@@ -55,9 +55,9 @@ const AddConcoction = () => {
         theme: "dark",
       });
       setIsLoading(false);
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },2000)
+      }, 2000);
     } catch (err) {
       console.error("Error deleting posts:", err);
       setIsLoading(false);

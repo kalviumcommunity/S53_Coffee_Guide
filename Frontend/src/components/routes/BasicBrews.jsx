@@ -9,9 +9,7 @@ const BasicBrews = () => {
     const fetchData = async () => {
       try {
         //! change to render.com link
-        const response = await axios.get(
-          "https://s53-coffee-guide.onrender.com/api/crud/"
-        );
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/`);
         setCoffee(response.data);
         setIsLoading(false); // Set loading to false after data is fetched
       } catch (err) {

@@ -12,25 +12,27 @@ const UpdateForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const [postData, setPostData] = useState({
-    user_name: null,
-    coffee_name: null,
-    description: null,
-    image_link: null,
-    ingredients: {
-      ing_1: null,
-      ing_2: null,
-      ing_3: null,
-      ing_4: null,
-      ing_5: null,
-    },
-    recipe: {
-      step_1: null,
-      step_2: null,
-      step_3: null,
-      step_4: null,
-      step_5: null,
+    setValue,
+  } = useForm({
+    defaultValues: {
+      user_name: "",
+      coffee_name: "",
+      description: "",
+      image_link: "",
+      ingredients: {
+        ing_1: "",
+        ing_2: "",
+        ing_3: "",
+        ing_4: "",
+        ing_5: "",
+      },
+      recipe: {
+        step_1: "",
+        step_2: "",
+        step_3: "",
+        step_4: "",
+        step_5: "",
+      },
     },
   });
 
@@ -38,23 +40,31 @@ const UpdateForm = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://s53-coffee-guide.onrender.com/api/crud/${id}`
+          `${import.meta.env.VITE_SERVER_URL}/${id}`
         );
-        setPostData(response.data);
+        // Set default values for the form fields
+        Object.entries(response.data).forEach(([key, value]) => {
+          if (key === "ingredients" || key === "recipe") {
+            Object.entries(value).forEach(([subKey, subValue]) => {
+              setValue(`${key}.${subKey}`, subValue);
+            });
+          } else {
+            setValue(key, value);
+          }
+        });
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id, setValue]);
 
   const onSubmit = async (data) => {
     try {
-      setPostData(data);
       const response = await axios.put(
-        `https://s53-coffee-guide.onrender.com/api/crud/${id}`,
-        postData
+        `${import.meta.env.VITE_SERVER_URL}/${id}`,
+        data
       );
       toast.success("Post Updated", {
         position: "top-center",
@@ -74,10 +84,6 @@ const UpdateForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("postData: ", postData);
-  });
-
   const handleButtonClick = () => {
     handleSubmit(onSubmit)();
   };
@@ -95,10 +101,6 @@ const UpdateForm = () => {
               className="form-input"
               type="text"
               {...register("user_name")}
-              value={postData.user_name || ""}
-              onChange={(e) =>
-                setPostData({ ...postData, user_name: e.target.value })
-              }
             />
           </label>
           {errors.user_name && (
@@ -111,10 +113,6 @@ const UpdateForm = () => {
               className="form-input"
               type="text"
               {...register("coffee_name")}
-              value={postData.coffee_name || ""}
-              onChange={(e) =>
-                setPostData({ ...postData, coffee_name: e.target.value })
-              }
             />
           </label>
           {errors.coffee_name && (
@@ -126,10 +124,6 @@ const UpdateForm = () => {
             <textarea
               className="form-input"
               {...register("description")}
-              value={postData.description || ""}
-              onChange={(e) =>
-                setPostData({ ...postData, description: e.target.value })
-              }
             />
           </label>
           {errors.description && (
@@ -159,10 +153,6 @@ const UpdateForm = () => {
               type="text"
               className="form-input"
               {...register("image_link")}
-              value={postData.image_link || ""}
-              onChange={(e) =>
-                setPostData({ ...postData, image_link: e.target.value })
-              }
             />
           </label>
           {errors.image_link && (
@@ -177,16 +167,6 @@ const UpdateForm = () => {
                 className="form-input"
                 type="text"
                 {...register(`ingredients.ing_${index}`)}
-                value={postData.ingredients[`ing_${index}`] || ""}
-                onChange={(e) =>
-                  setPostData({
-                    ...postData,
-                    ingredients: {
-                      ...postData.ingredients,
-                      [`ing_${index}`]: e.target.value,
-                    },
-                  })
-                }
                 placeholder={`Ingredient ${index}`}
               />
             ))}
@@ -199,16 +179,6 @@ const UpdateForm = () => {
                 key={index}
                 className="form-input"
                 {...register(`recipe.step_${index}`)}
-                value={postData.recipe[`step_${index}`] || ""}
-                onChange={(e) =>
-                  setPostData({
-                    ...postData,
-                    recipe: {
-                      ...postData.recipe,
-                      [`step_${index}`]: e.target.value,
-                    },
-                  })
-                }
                 placeholder={`Step ${index}`}
               />
             ))}
