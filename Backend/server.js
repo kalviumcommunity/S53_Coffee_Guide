@@ -2,17 +2,17 @@ const express = require("express");
 const app = express();
 const connectDB = require("./config/dbConnection");
 const mongoose = require("mongoose");
-const cors = require('cors')
+const cors = require("cors");
 const crudRouter = require("./routes/crudRouter");
 const errorHandler = require("./middleware/errorHandler");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 app.use("/api/crud/", crudRouter);
 connectDB();
-app.use(errorHandler)
+app.use(errorHandler);
 
 app.get("/", async (req, res) => {
   try {
@@ -28,7 +28,6 @@ app.get("/", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on PORT: ${PORT}`);

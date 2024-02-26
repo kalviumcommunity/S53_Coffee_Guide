@@ -497,6 +497,7 @@ input[type="submit"] {
   background-color: hsla(0, 0%, 0%, 0.729);
   box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
   padding: 10px;
+  font-size: 20px;
 }
 
 .intro-container {
@@ -732,4 +733,16 @@ input[type="submit"] {
   justify-content: space-evenly;
   width: 50%;
   margin: 2% auto;
+}
+
+.account {
+  margin: 2%;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
+.account:hover {
+  color: brown;
+  text-decoration: underline;
 }
