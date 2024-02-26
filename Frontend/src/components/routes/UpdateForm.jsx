@@ -121,10 +121,7 @@ const UpdateForm = () => {
           {/* Description */}
           <label>
             Description
-            <textarea
-              className="form-input"
-              {...register("description")}
-            />
+            <textarea className="form-input" {...register("description")} />
           </label>
           {errors.description && (
             <p className="err">{errors.description.message}</p>

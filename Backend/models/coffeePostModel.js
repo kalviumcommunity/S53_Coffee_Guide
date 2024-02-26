@@ -18,8 +18,11 @@ const recipeSchema = mongoose.Schema({
 
 const coffeePostSchema = mongoose.Schema(
   {
-    user_name:{ type: String, required: [true, "Please add your name"] },
-    coffee_name: { type: String, required: [true, "Please add name to your coffee"] },
+    user_name: { type: String, required: [true, "Please add your name"] },
+    coffee_name: {
+      type: String,
+      required: [true, "Please add name to your coffee"],
+    },
     description: {
       type: String,
       required: [true, "Please add some description"],

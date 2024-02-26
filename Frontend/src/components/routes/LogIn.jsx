@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignUp = () => {
+const LogIn = () => {
   const {
     register,
     handleSubmit,
@@ -51,11 +51,11 @@ const SignUp = () => {
     <div className="form-container">
       <ToastContainer />
       <div className="form">
-        <h1>Sign Up</h1>
+        <h1>Log In</h1>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           {/* Username input */}
           <label>
-            Create Username
+            Username
             <input
               className="form-input"
               type="text"
@@ -101,23 +101,6 @@ const SignUp = () => {
           </label>
           {<p className="err">{errors.password?.message}</p>}
 
-          {/* Retype Password input */}
-          <label>
-            Retype Password
-            <input
-              className="form-input"
-              type={showPassword ? "text" : "password"}
-              name="retypePassword"
-              {...register("retypePassword", {
-                validate: (value) =>
-                  value === passwordValue || "Passwords do not match",
-              })}
-              onPaste={preventCopyPaste}
-              onCopy={preventCopyPaste}
-            />
-          </label>
-          {<p className="err">{errors.retypePassword?.message}</p>}
-
           {/* Checkbox to show/hide password */}
           <label className="label-flex">
             <h2>Show Password</h2>
@@ -126,10 +109,10 @@ const SignUp = () => {
 
           {/* Submit button */}
           <div className="button-flex">
-            <input type="submit" value="Sign Up" className="signup-btn" />
+            <input type="submit" value="Log In" className="signup-btn" />
           </div>
-          <Link to="/login" className="account">
-            Already have an account?
+          <Link to="/signup" className="account">
+            Don't have an account?
           </Link>
         </form>
       </div>
@@ -137,4 +120,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default LogIn;

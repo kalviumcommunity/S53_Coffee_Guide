@@ -32,7 +32,7 @@ const Navbar = () => {
               <p>JavaCraft</p>
             </Link>
             <Link to="/signup" className="link1">
-              <p>Sign Up</p>
+              <p>Sign Up/Log In</p>
             </Link>
           </div>
         </div>

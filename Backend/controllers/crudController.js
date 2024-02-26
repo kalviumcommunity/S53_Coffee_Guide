@@ -1,11 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const CoffeeModel = require("../models/coffeeModels");
 const CoffeePostModel = require("../models/coffeePostModel");
+const { coffeePostValidator } = require("../validators/coffeeValidator");
 
 const getData = asyncHandler(async (req, res) => {
   const data = await CoffeeModel.find();
   res.status(200).json(data);
 });
+
 const getDataPosts = asyncHandler(async (req, res) => {
   const data = await CoffeePostModel.find();
   res.status(200).json(data);
@@ -18,15 +20,23 @@ const getDataById = asyncHandler(async (req, res) => {
 });
 
 const createData = asyncHandler(async (req, res) => {
-  const data = await CoffeePostModel.create(req.body);
+  const { error, value } = coffeePostValidator(req.body);
+  if (error) {
+    res.send(error.details);
+  }
+  const data = await CoffeePostModel.create(value);
   res.status(201).json(data);
 });
 
 const updateData = asyncHandler(async (req, res) => {
+  const { error, value } = coffeePostValidator(req.body);
+  if (error) {
+    res.send(error.details);
+  }
   const id = req.params.id;
   const dataUpdateID = await CoffeePostModel.findByIdAndUpdate(
     { _id: id },
-    req.body
+    value
   );
   res.status(200).json(dataUpdateID);
 });
