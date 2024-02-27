@@ -4,11 +4,9 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Navbar = () => {
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, removeCookie] = useCookies(["userName"]);
   const logOut = () => {
-    setTimeout(() => {
-      setCookie("userName", null);
-    }, 1000);
+    removeCookie("userName");
   };
 
   return (
