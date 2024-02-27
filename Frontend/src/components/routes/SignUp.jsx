@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,39 +15,73 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  // State for storing form data
-  const [formData, setFormData] = useState(null);
-
-  // Watch the value of the "password" field
-  const passwordValue = watch("password");
-
-  // State for controlling the visibility of the password
   const [showPassword, setShowPassword] = useState(false);
 
-  // Toggle function for showing/hiding password
-  const passwordShow = () => {
+  const onSubmit = async (data) => {
+    try {
+      // Remove retypePassword from data
+      const { retypePassword, ...postData } = data;
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_AUTH_SERVER_URL}/signup`,
+        postData
+      );
+
+      // Display success message if user was successfully created
+      toast.success("Registration Successful! Please Log In.", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      // Redirect to login page after successful signup
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      console.error("Error signing up:", error);
+
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message === "User already exists!"
+      ) {
+        // Prompt the user to change username
+        toast.error(
+          "Username already exists. Please choose a different username.",
+          {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
+      } else {
+        toast.error("Error signing up. Please try again.", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    }
+  };
+
+  const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  // Form submit handler
-  const formSubmitHandler = (data) => {
-    toast.success("Registration Complete", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-    // Set form data in the state
-    setFormData(data);
-  };
-
-  // Function to prevent copy-paste events
-  const preventCopyPaste = (e) => {
-    e.preventDefault();
   };
 
   return (
@@ -52,79 +89,68 @@ const SignUp = () => {
       <ToastContainer />
       <div className="form">
         <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit(formSubmitHandler)}>
-          {/* Username input */}
-          <label>
-            Create Username
+        <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
+          {/* Username */}
+          <label className="form-label">
+            Username
             <input
-              className="form-input"
               type="text"
-              name="username"
-              autoComplete="none"
-              {...register("username", {
-                required: "Please enter a Username",
-                pattern: {
-                  value: /^[a-zA-Z0-9._-]+$/,
-                  message: "Only letters, numbers, (_) , (.), and (-) allowed",
-                },
+              {...register("user_name", {
+                required: "Username is required",
                 minLength: {
                   value: 3,
-                  message: "Minimum 2 characters required",
+                  message: "Username must be at least 3 characters",
                 },
               })}
+              className="form-input"
             />
+            {errors.user_name && (
+              <p className="err">{errors.user_name.message}</p>
+            )}
           </label>
-          {<p className="err">{errors.username?.message}</p>}
-          {/* Password input */}
-          <label>
+
+          {/* Password */}
+          <label className="form-label">
             Password
             <input
-              className="form-input"
               type={showPassword ? "text" : "password"}
-              name="password"
               {...register("password", {
-                required: "Please enter Password",
+                required: "Password is required",
                 minLength: {
-                  value: 10,
-                  message: "Minimum 8 characters required",
-                },
-                pattern: {
-                  value:
-                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z]).{8,}$/,
-                  message:
-                    "Password should contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
+                  value: 8,
+                  message: "Password must be at least 8 characters",
                 },
               })}
-              onPaste={preventCopyPaste}
-              onCopy={preventCopyPaste}
+              className="form-input"
             />
+            {errors.password && (
+              <p className="err">{errors.password.message}</p>
+            )}
           </label>
-          {<p className="err">{errors.password?.message}</p>}
 
-          {/* Retype Password input */}
-          <label>
+          {/* Retype Password */}
+          <label className="form-label">
             Retype Password
             <input
-              className="form-input"
               type={showPassword ? "text" : "password"}
-              name="retypePassword"
               {...register("retypePassword", {
+                required: "Please retype your password",
                 validate: (value) =>
-                  value === passwordValue || "Passwords do not match",
+                  value === watch("password") || "Passwords do not match",
               })}
-              onPaste={preventCopyPaste}
-              onCopy={preventCopyPaste}
+              className="form-input"
             />
+            {errors.retypePassword && (
+              <p className="err">{errors.retypePassword.message}</p>
+            )}
           </label>
-          {<p className="err">{errors.retypePassword?.message}</p>}
 
-          {/* Checkbox to show/hide password */}
+          {/* Show Password Checkbox */}
           <label className="label-flex">
             <h2>Show Password</h2>
-            <input type="checkbox" onClick={passwordShow} />
+            <input type="checkbox" onClick={togglePasswordVisibility} />
           </label>
 
-          {/* Submit button */}
           <div className="button-flex">
             <input type="submit" value="Sign Up" className="signup-btn" />
           </div>

@@ -1,110 +1,130 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["userName"]);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  // State for storing form data
-  const [formData, setFormData] = useState(null);
-
-  // Watch the value of the "password" field
-  const passwordValue = watch("password");
-
-  // State for controlling the visibility of the password
   const [showPassword, setShowPassword] = useState(false);
 
-  // Toggle function for showing/hiding password
-  const passwordShow = () => {
+  const formSubmitHandler = async (data) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_AUTH_SERVER_URL}/login`,
+        data
+      );
+
+      // Check if password is correct
+      if (response.data.isPasswordValid) {
+        setCookie("userName", response.data.user_name);
+        setTimeout(() => {
+          toast.success("Logged In Successfully!", {
+            position: "top-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }, 1000);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } else {
+        // Display error message if password is incorrect
+        toast.error("Incorrect password. Please try again.", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        console.log("passwordValid: ", response.data.isPasswordValid);
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+
+      // Display error message
+      toast.error("Error logging in. Please try again.", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
+
+  const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  };
-
-  // Form submit handler
-  const formSubmitHandler = (data) => {
-    toast.success("Registration Complete", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-    // Set form data in the state
-    setFormData(data);
-  };
-
-  // Function to prevent copy-paste events
-  const preventCopyPaste = (e) => {
-    e.preventDefault();
   };
 
   return (
     <div className="form-container">
-      <ToastContainer />
       <div className="form">
         <h1>Log In</h1>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
-          {/* Username input */}
-          <label>
+          {/* Username */}
+          <label className="form-label">
             Username
             <input
-              className="form-input"
               type="text"
-              name="username"
-              autoComplete="none"
-              {...register("username", {
-                required: "Please enter a Username",
-                pattern: {
-                  value: /^[a-zA-Z0-9._-]+$/,
-                  message: "Only letters, numbers, (_) , (.), and (-) allowed",
-                },
+              {...register("user_name", {
+                required: "Username is required",
                 minLength: {
                   value: 3,
-                  message: "Minimum 2 characters required",
+                  message: "Username must be at least 3 characters",
                 },
               })}
+              className="form-input"
             />
+            {errors.user_name && (
+              <p className="err">{errors.user_name.message}</p>
+            )}
           </label>
-          {<p className="err">{errors.username?.message}</p>}
-          {/* Password input */}
-          <label>
+
+          {/* Password */}
+          <label className="form-label">
             Password
             <input
-              className="form-input"
               type={showPassword ? "text" : "password"}
-              name="password"
               {...register("password", {
-                required: "Please enter Password",
+                required: "Password is required",
                 minLength: {
-                  value: 10,
-                  message: "Minimum 8 characters required",
-                },
-                pattern: {
-                  value:
-                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>])(?=.*[a-zA-Z]).{8,}$/,
-                  message:
-                    "Password should contain at least 1 uppercase, 1 lowercase, 1 number, and 1 special character",
+                  value: 8,
+                  message: "Password must be at least 8 characters",
                 },
               })}
-              onPaste={preventCopyPaste}
-              onCopy={preventCopyPaste}
+              className="form-input"
             />
+            {errors.password && (
+              <p className="err">{errors.password.message}</p>
+            )}
           </label>
-          {<p className="err">{errors.password?.message}</p>}
 
           {/* Checkbox to show/hide password */}
           <label className="label-flex">
             <h2>Show Password</h2>
-            <input type="checkbox" onClick={passwordShow} />
+            <input type="checkbox" onClick={togglePasswordVisibility} />
           </label>
 
           {/* Submit button */}
@@ -116,6 +136,7 @@ const LogIn = () => {
           </Link>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

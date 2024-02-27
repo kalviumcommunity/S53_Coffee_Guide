@@ -42,10 +42,6 @@ const PostForm = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("postData: ", postData);
-  }, [postData]);
-
   const handleButtonClick = () => {
     handleSubmit(onSubmit)();
   };
