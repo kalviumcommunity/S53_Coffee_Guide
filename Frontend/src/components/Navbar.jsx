@@ -1,8 +1,16 @@
 import React from "react";
 import LOGO from "./../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 const Navbar = () => {
+  const [cookies, setCookie] = useCookies(["userName"]);
+  const logOut = () => {
+    setTimeout(() => {
+      setCookie("userName", null);
+    }, 1000);
+  };
+
   return (
     <div className="main-div">
       <div className="border">
@@ -31,9 +39,15 @@ const Navbar = () => {
             <Link to="/post" className="link1">
               <p>JavaCraft</p>
             </Link>
-            <Link to="/signup" className="link1">
-              <p>Sign Up/Log In</p>
-            </Link>
+            {!cookies.userName ? (
+              <Link to="/signup" className="link1 logout">
+                <p>Sign Up</p>
+              </Link>
+            ) : (
+              <p className="link1 logout" onClick={logOut}>
+                Log Out
+              </p>
+            )}
           </div>
         </div>
       </div>

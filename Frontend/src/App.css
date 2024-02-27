@@ -500,6 +500,25 @@ input[type="submit"] {
   font-size: 20px;
 }
 
+.logout {
+  border-radius: 10px;
+  color: #ffffff;
+  font-family: forte;
+  font-size: 30px;
+  letter-spacing: 2px;
+  border: 3px solid rgb(255, 170, 0);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+  padding: 15px;
+}
+
+.logout:hover {
+  color: #000000;
+  background-color: hsla(0, 0%, 100%, 0.445);
+  border: 3px solid rgb(0, 0, 0);
+  transition: all 0.3s;
+}
+
 .intro-container {
   margin: 3% auto;
   text-align: center;
