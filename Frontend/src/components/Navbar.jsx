@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 const Navbar = () => {
-  const [cookies, removeCookie] = useCookies(["userName"]);
-  const logOut = () => {
+  const [cookies, removeCookie] = useCookies(["userToken", "userName"]);
+
+  const handleLogout = () => {
+    removeCookie("userToken");
     removeCookie("userName");
+    window.location.reload();
   };
 
   return (
@@ -37,12 +40,12 @@ const Navbar = () => {
             <Link to="/post" className="link1">
               <p>JavaCraft</p>
             </Link>
-            {!cookies.userName ? (
+            {cookies.userName && cookies.userName == "undefined" ? (
               <Link to="/signup" className="link1 logout">
                 <p>Sign Up</p>
               </Link>
             ) : (
-              <p className="link1 logout" onClick={logOut}>
+              <p className="link1 logout" onClick={handleLogout}>
                 Log Out
               </p>
             )}

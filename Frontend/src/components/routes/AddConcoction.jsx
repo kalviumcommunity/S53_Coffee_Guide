@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 
 const AddConcoction = () => {
+  const [cookies, setCookie] = useCookies(["userToken", "userName"]);
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +15,6 @@ const AddConcoction = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        //! change to render.com link
         const response = await axios.get(
           `${import.meta.env.VITE_SERVER_URL}/posts`
         );
@@ -38,9 +39,12 @@ const AddConcoction = () => {
     setModalOpen(false);
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, userName) => {
     try {
-      //! change to render.com link
+      if (userName !== cookies.userName) {
+        alert("You are not allowed to delete this post.");
+        return;
+      }
       const deletePost = await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/${id}`
       );
@@ -111,19 +115,21 @@ const AddConcoction = () => {
                 >
                   View Details
                 </button>
-                <div className="update-delete">
-                  <Link
-                    to={`/update/${post._id}`}
-                    style={{
-                      textDecoration: "none",
-                    }}
-                  >
-                    <button>Update</button>
-                  </Link>
-                  <button onClick={(e) => handleDelete(post._id)}>
-                    Delete
-                  </button>
-                </div>
+                {cookies.userToken && cookies.userName === post.user_name && (
+                  <div className="update-delete">
+                    <Link
+                      to={`/update/${post._id}`}
+                      style={{
+                        textDecoration: "none",
+                      }}
+                    >
+                      <button>Update</button>
+                    </Link>
+                    <button onClick={(e) => handleDelete(post._id, post.user_name)}>
+                      Delete
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>

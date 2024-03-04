@@ -4,8 +4,10 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 
 const UpdateForm = () => {
+  const [cookies, setCookie] = useCookies(["userToken", "userName"]);
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -35,6 +37,13 @@ const UpdateForm = () => {
       },
     },
   });
+
+  useEffect(() => {
+    if (cookies.userToken == "undefined") {
+      alert("Please Log In to Update the Post");
+      navigate("/login");
+    }
+  }, [cookies.userToken, navigate]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,6 +110,7 @@ const UpdateForm = () => {
               className="form-input"
               type="text"
               {...register("user_name")}
+              disabled
             />
           </label>
           {errors.user_name && (
