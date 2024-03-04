@@ -9,7 +9,7 @@ import { useCookies } from "react-cookie";
 
 const LogIn = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, setCookie] = useCookies(["userToken", "userName"]);
   const {
     register,
     handleSubmit,
@@ -27,6 +27,7 @@ const LogIn = () => {
 
       // Check if password is correct
       if (response.data.isPasswordValid) {
+        setCookie("userToken", response.data.token);
         setCookie("userName", response.data.user_name);
         setTimeout(() => {
           toast.success("Logged In Successfully!", {
@@ -41,7 +42,7 @@ const LogIn = () => {
           });
         }, 1000);
         setTimeout(() => {
-          navigate("/");
+          navigate("/concoctions");
         }, 3000);
       } else {
         // Display error message if password is incorrect

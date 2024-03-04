@@ -4,8 +4,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 
 const PostForm = () => {
+  const [cookies] = useCookies(["userToken", "userName"]);
   const navigate = useNavigate();
   const {
     register,
@@ -14,10 +16,15 @@ const PostForm = () => {
   } = useForm();
   const [postData, setPostData] = useState(null);
 
+  useEffect(() => {
+    if (cookies.userToken == "undefined") {
+      alert("Please Log In to Post");
+      navigate("/login");
+    }
+  }, [cookies.userToken, navigate]);
+
   const onSubmit = async (data) => {
-    console.log("data: ", data);
     try {
-      //! change to render.com link
       const response = await axios.post(
         `${import.meta.env.VITE_SERVER_URL}/`,
         data
@@ -32,7 +39,6 @@ const PostForm = () => {
         progress: undefined,
         theme: "dark",
       });
-      console.log("response: ", data);
       setPostData(response.data);
       setTimeout(() => {
         navigate("/concoctions");
@@ -42,22 +48,20 @@ const PostForm = () => {
     }
   };
 
-  const handleButtonClick = () => {
-    handleSubmit(onSubmit)();
-  };
-
   return (
     <div className="form-container">
       <ToastContainer />
       <div className="form">
         <h1>Create a Coffee Post</h1>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* User Name */}
           <label>
             User Name
             <input
               className="form-input"
               type="text"
+              defaultValue={cookies.userName}
+              disabled
               {...register("user_name", {
                 required: "Please enter a Username",
                 pattern: {
@@ -89,7 +93,6 @@ const PostForm = () => {
           {errors.coffee_name && (
             <p className="err">{errors.coffee_name.message}</p>
           )}
-
           {/* Description */}
           <label>
             Description
@@ -200,12 +203,7 @@ const PostForm = () => {
           </label>
 
           <div className="button-flex">
-            {/* Normal button triggering form submission */}
-            <button
-              type="button"
-              onClick={handleButtonClick}
-              className="signup-btn"
-            >
+            <button type="submit" className="signup-btn">
               Post
             </button>
           </div>
@@ -214,5 +212,4 @@ const PostForm = () => {
     </div>
   );
 };
-
 export default PostForm;
