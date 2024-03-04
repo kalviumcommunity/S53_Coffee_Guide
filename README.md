@@ -20,4 +20,4 @@ This is your journey, not a coffee competition. Relax, experiment, and savor the
 
 **[Render.com Deployment Link](https://s53-coffee-guide.onrender.com)**
 
-**[VERCEL Deployment Link](https://asap-project-coffee-guide.vercel.app/)**
+**[VERCEL Deployment Link](https://asap-coffee-guide.vercel.app/)**
