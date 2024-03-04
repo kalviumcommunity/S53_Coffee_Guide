@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const CoffeeModel = require("../models/coffeeModels");
 const CoffeePostModel = require("../models/coffeePostModel");
+const userModel = require("../models/userModel")
 const { coffeePostValidator } = require("../validators/coffeeValidator");
 
 const getData = asyncHandler(async (req, res) => {
@@ -12,6 +13,16 @@ const getDataPosts = asyncHandler(async (req, res) => {
   const data = await CoffeePostModel.find();
   res.status(200).json(data);
 });
+
+const getUser = async (req, res) => {
+  try {
+    const user = await userModel.find();
+    res.status(200).json(user);
+  } catch (error) {
+    console.log("error: ", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 const getDataById = asyncHandler(async (req, res) => {
   const id = req.params.id;
@@ -56,4 +67,5 @@ module.exports = {
   deleteData,
   getDataPosts,
   getDataById,
+  getUser,
 };

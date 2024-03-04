@@ -766,3 +766,32 @@ input[type="submit"] {
   color: brown;
   text-decoration: underline;
 }
+
+.filter-users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5% auto 1% auto;
+}
+
+.filter-users select {
+  color: #ffffff;
+  font-family: forte;
+  font-size: 25px;
+  padding: 20px;
+  letter-spacing: 2px;
+  border: 3px solid hsl(40, 100%, 50%);
+  background-color: hsla(0, 0%, 0%, 0.729);
+  box-shadow: 0 3px 30px 5px hsla(0, 0%, 0%, 0.326);
+  border-radius: 20px;
+}
+
+.filter-users select:focus {
+  outline: none;
+}
+
+.loading-container.p {
+  font-family: Saeada;
+  font-size: 50px;
+  color: white;
+}

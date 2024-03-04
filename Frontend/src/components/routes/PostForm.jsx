@@ -61,7 +61,6 @@ const PostForm = () => {
               className="form-input"
               type="text"
               defaultValue={cookies.userName}
-              disabled
               {...register("user_name", {
                 required: "Please enter a Username",
                 pattern: {
