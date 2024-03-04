@@ -110,7 +110,6 @@ const UpdateForm = () => {
               className="form-input"
               type="text"
               {...register("user_name")}
-              disabled
             />
           </label>
           {errors.user_name && (
