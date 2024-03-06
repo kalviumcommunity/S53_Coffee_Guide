@@ -193,6 +193,7 @@ const AddConcoction = () => {
                     <ul>
                       {Object.entries(selectedPost.ingredients)
                         .filter(([key]) => key !== "_id") // Exclude the _id property
+                        .filter(([key, ingredient]) => ingredient) // Filter out empty ingredients
                         .map(([key, ingredient], index) => (
                           <li key={index}>{ingredient}</li>
                         ))}
@@ -208,6 +209,7 @@ const AddConcoction = () => {
                     <ol>
                       {Object.entries(selectedPost.recipe)
                         .filter(([key]) => key !== "_id") // Exclude the _id property
+                        .filter(([key, step]) => step) // Filter out empty recipe steps
                         .map(([key, step], index) => (
                           <li key={index}>{step}</li>
                         ))}
