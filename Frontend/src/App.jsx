@@ -12,6 +12,7 @@ import "aos/dist/aos.css";
 import PostForm from "./components/routes/PostForm";
 import UpdateForm from "./components/routes/UpdateForm";
 import LogIn from "./components/routes/LogIn";
+import Footer from "./components/Footer";
 
 function App() {
   AOS.init();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/update/:id" element={<UpdateForm />} />
         <Route path="/login" element={<LogIn />} />
       </Routes>
+      <Footer/>
     </>
   );
 }

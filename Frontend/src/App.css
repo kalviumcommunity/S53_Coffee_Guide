@@ -24,6 +24,27 @@
   padding: 0;
 }
 
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border: 2px solid hsl(38, 100%, 73%);
+  background: hsl(0, 0%, 0%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(38, 100%, 53%);
+  border-radius: 200px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 button {
   cursor: pointer;
 }
@@ -794,4 +815,59 @@ input[type="submit"] {
   font-family: Saeada;
   font-size: 50px;
   color: white;
+}
+
+.footer-container {
+  /* position: fixed;
+  bottom: 0; */
+  padding: 20px;
+  font-family: forte;
+  color: #ffecc7;
+  width: auto;
+  height: 200px;
+  background: hsla(38, 100%, 53%, 0.4);
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 1);
+  backdrop-filter: blur(10px);
+  border: 5px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 0;
+  border-radius: 20px 20px 0 0;
+}
+
+.footer-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  color: #000000;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socials div {
+  margin: 20px;
+}
+
+.socials div > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.socials div > h2 {
+  font-size: 18px;
+}
+.socials div > a > img {
+  height: 40px;
+  width: 40px;
+}
+
+.footer-container h6 {
+  font-size: 24px;
+  text-align: center;
 }
