@@ -22,7 +22,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/brews" element={<BasicBrews />} />
+        <Route path="/brews" element={<BasicBrews />} />  
         <Route path="/concoctions" element={<AddConcoction />} />
         <Route path="/post" element={<PostForm />} />
         <Route path="/signup" element={<SignUp />} />

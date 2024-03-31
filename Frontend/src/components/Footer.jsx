@@ -16,7 +16,7 @@ const Footer = () => {
           </div>
           <div className="socials">
             <div>
-              <a href="https://www.instagram.com/_f4zil_786?igsh=cjZ4aWh5ZXpoZXAz">
+              <a href="https://www.instagram.com/_f4zil_811?igsh=cjZ4aWh5ZXpoZXAz">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/1024px-Instagram-Icon.png"
                   alt="instagram"
